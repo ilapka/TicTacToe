@@ -1,14 +1,18 @@
+using TicTacToe.Codebase.Data;
+using TicTacToe.Codebase.Services.PersistentProgress;
+using TicTacToe.Codebase.Services.SaveLoad;
+
 namespace TicTacToe.Codebase.Infrastructure.StateMachine
 {
     public class LoadProgressState : ApplicationState
     { 
-        //private readonly IPersistentProgressService _progressService;
-        //private readonly ISaveLoadService _saveLoadService;
+        private readonly IPersistentProgressService _progressService;
+        private readonly ISaveLoadService _saveLoadService;
 
-        public LoadProgressState()//, IPersistentProgressService progressService, ISaveLoadService saveLoadService)
+        public LoadProgressState(IPersistentProgressService progressService, ISaveLoadService saveLoadService)
         {
-            // _progressService = progressService;
-            // _saveLoadService = saveLoadService;
+            _progressService = progressService;
+            _saveLoadService = saveLoadService;
         }
 
         public override void Enter(StateArgs args = null)
@@ -26,19 +30,16 @@ namespace TicTacToe.Codebase.Infrastructure.StateMachine
 
         private void LoadProgressOrInitNew()
         {
-            //_progressService.Progress = _saveLoadService.LoadProgress() ?? NewProgress();
+            _progressService.GameProgress = _saveLoadService.LoadProgress() ?? NewProgress();
         }
 
-        // private PlayerProgress NewProgress()
-        // {
-        //     PlayerProgress progress = new PlayerProgress(initialLevel: Main);
-        //
-        //     progress.HeroState.MaxHP = 50;
-        //     progress.HeroState.ResetHP();
-        //     progress.HeroStats.Damage = 1f;
-        //     progress.HeroStats.DamageRadius = 0.5f;
-        //     
-        //     return progress;
-        // }
+        private GameProgress NewProgress()
+        {
+            GameProgress progress = new GameProgress();
+        
+            //fill default
+            
+            return progress;
+        }
     }
 }
