@@ -10,7 +10,7 @@ namespace TicTacToe.Codebase.Infrastructure.StateMachine
             return this;
         }
 
-        public abstract void Enter(StateArgs args = null);
+        public abstract void Enter(IStateArgs args = null);
         public abstract void Exit();
     }
 }

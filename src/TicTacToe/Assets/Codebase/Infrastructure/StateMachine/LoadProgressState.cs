@@ -15,7 +15,7 @@ namespace TicTacToe.Codebase.Infrastructure.StateMachine
             _saveLoadService = saveLoadService;
         }
 
-        public override void Enter(StateArgs args = null)
+        public override void Enter(IStateArgs args = null)
         {
             LoadProgressOrInitNew();
 

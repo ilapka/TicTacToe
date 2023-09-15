@@ -1,6 +1,6 @@
 namespace TicTacToe.Codebase.Infrastructure.StateMachine
 {
-    public class LoadLevelStateArgs : StateArgs
+    public class LoadLevelStateArgs : IStateArgs
     {
         public string LevelSceneName { get; }
 

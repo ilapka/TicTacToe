@@ -22,7 +22,7 @@ namespace TicTacToe.Codebase.Infrastructure.StateMachine
             };
         }
 
-        public void Enter<TState>(StateArgs args = null) where TState : ApplicationState
+        public void Enter<TState>(IStateArgs args = null) where TState : ApplicationState
         {
             IState state = ChangeState<TState>();
             state.Enter(args);

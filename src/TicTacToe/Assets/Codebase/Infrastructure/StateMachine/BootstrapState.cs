@@ -9,7 +9,7 @@ namespace TicTacToe.Codebase.Infrastructure.StateMachine
             _sceneLoader = sceneLoader;
         }
 
-        public override void Enter(StateArgs args = null)
+        public override void Enter(IStateArgs args = null)
         {
             _sceneLoader.Load(Scenes.Initial, onLoaded: EnterLoadProgress);
         }

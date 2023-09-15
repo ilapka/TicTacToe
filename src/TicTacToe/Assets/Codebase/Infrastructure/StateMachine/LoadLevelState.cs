@@ -24,7 +24,7 @@ namespace TicTacToe.Codebase.Infrastructure.StateMachine
             // _uiFactory = uiFactory;
         }
 
-        public override void Enter(StateArgs args)
+        public override void Enter(IStateArgs args)
         {
             if (args != null)
             {
