@@ -4,12 +4,12 @@ using TicTacToe.Codebase.Services.UI;
 
 namespace TicTacToe.Codebase.UI.Elements
 {
-    public class WinScreenArgs : UiArgs
+    public class GameResultScreenArgs : UiArgs
     {
         public SignType WinnerSign { get; }
         public Action OnCloseCallback { get; }
 
-        public WinScreenArgs(SignType winnerSign, Action onCloseCallback)
+        public GameResultScreenArgs(SignType winnerSign, Action onCloseCallback)
         {
             WinnerSign = winnerSign;
             OnCloseCallback = onCloseCallback;

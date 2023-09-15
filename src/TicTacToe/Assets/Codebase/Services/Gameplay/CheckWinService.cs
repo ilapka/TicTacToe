@@ -24,8 +24,8 @@ namespace TicTacToe.Codebase.Services.Gameplay
         private void CheckWin(Cell clickedCell)
         {
             var chainLength = GetLongestChain(_gameFieldService.Field, clickedCell);
-
-            if (chainLength >= _progressService.PlayerProgress.Settings.ChainLenght)
+            
+            if (chainLength >= _progressService.PlayerProgress.FieldSettings.ChainLenght)
             {
                 DeclareWin(clickedCell.Sign);
             }
@@ -46,25 +46,25 @@ namespace TicTacToe.Codebase.Services.Gameplay
             Vector2Int down = new Vector2Int(-1, 0);
             Vector2Int up = new Vector2Int(1, 0);
 
-            int verticalLenght = GetLongestChainOnDirection(cells, startCell, down)
+            int verticalLenght = 1 + GetLongestChainOnDirection(cells, startCell, down)
                                  + GetLongestChainOnDirection(cells, startCell, up);
             
             Vector2Int right = new Vector2Int(0, 1);
             Vector2Int left = new Vector2Int(0, -1);
             
-            int horizontalLenght = GetLongestChainOnDirection(cells, startCell, right)
+            int horizontalLenght = 1 + GetLongestChainOnDirection(cells, startCell, right)
                 + GetLongestChainOnDirection(cells, startCell, left);
             
             Vector2Int diagonalOneRight = new Vector2Int(1,-1);
             Vector2Int diagonalOneLeft = new Vector2Int(-1, 1);
             
-            int diagonalOneLenght = GetLongestChainOnDirection(cells, startCell, diagonalOneRight)
+            int diagonalOneLenght = 1 + GetLongestChainOnDirection(cells, startCell, diagonalOneRight)
                                     + GetLongestChainOnDirection(cells, startCell, diagonalOneLeft);
             
             Vector2Int diagonalTwoRight = new Vector2Int(1, 1);
             Vector2Int diagonalTwoLeft = new Vector2Int(-1, -1);
 
-            int diagonalTwoLenght = GetLongestChainOnDirection(cells, startCell, diagonalTwoRight)
+            int diagonalTwoLenght = 1 + GetLongestChainOnDirection(cells, startCell, diagonalTwoRight)
                                     + GetLongestChainOnDirection(cells, startCell, diagonalTwoLeft);
             
             return Mathf.Max(verticalLenght, horizontalLenght, diagonalOneLenght, diagonalTwoLenght);
@@ -74,25 +74,30 @@ namespace TicTacToe.Codebase.Services.Gameplay
         {
             Vector2Int currentPosition = startCell.Position + direction;
 
-            int currentLength = 1;
+            int currentLength = 0;
             
-            while (cells.Length < currentPosition.x
-                   && currentPosition.x >= 0
-                   && cells[currentPosition.x].Length < currentPosition.y
-                   && currentPosition.y >= 0)
+            while (IsValidPosition(cells, currentPosition))
             {
                 Cell cell = cells[currentPosition.x][currentPosition.y];
-
+                
                 if (cell.Sign != startCell.Sign)
                 {
                     break;
                 }
-
+                
                 currentLength++;
                 currentPosition += direction;
             }
 
             return currentLength;
+        }
+
+        private bool IsValidPosition(Cell[][] cells, Vector2Int position)
+        {
+            return cells.Length > position.x
+                   && position.x >= 0
+                   && cells[position.x].Length > position.y
+                   && position.y >= 0;
         }
 
         public void Dispose()

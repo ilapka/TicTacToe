@@ -5,6 +5,7 @@ namespace TicTacToe.Codebase.Data
     [Serializable]
     public class PlayerProgress
     {
-        public FieldSettings Settings;
+        public FieldSettings FieldSettings;
+        public FieldStatus FieldStatus;
     }
 }

@@ -1,4 +1,5 @@
 using TicTacToe.Codebase.Data;
+using TicTacToe.Codebase.Services.Gameplay;
 using TicTacToe.Codebase.Services.PersistentProgress;
 using TicTacToe.Codebase.Services.SaveLoad;
 
@@ -39,7 +40,8 @@ namespace TicTacToe.Codebase.Infrastructure.StateMachine
         {
             return new PlayerProgress()
             {
-                Settings = _gameSettings.DefaultFieldSettigns,
+                FieldSettings = _gameSettings.DefaultFieldSettigns,
+                FieldStatus = new FieldStatus(){ CurrentSign = SignType.Cross }
             };
         }
     }

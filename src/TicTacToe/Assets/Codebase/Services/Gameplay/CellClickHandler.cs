@@ -11,7 +11,7 @@ namespace TicTacToe.Codebase.Services.Gameplay
 
         public event Action<Cell> OnCellClicked;
 
-        public CellClickHandler(IInputService input, IGameState gameState)
+        public CellClickHandler(IGameState gameState, IInputService input)
         {
             _input = input;
             _gameState = gameState;

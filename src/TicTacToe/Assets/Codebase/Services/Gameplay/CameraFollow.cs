@@ -25,7 +25,7 @@ namespace TicTacToe.Codebase.Services.Gameplay
 
         private void UpdateCamera()
         {
-            FieldSettings fieldSettings = _persistentProgress.PlayerProgress.Settings;
+            FieldSettings fieldSettings = _persistentProgress.PlayerProgress.FieldSettings;
             
             Camera camera = _cameraProvider.GetCamera();
             camera.orthographic = true;

@@ -1,20 +1,21 @@
-﻿using TicTacToe.Codebase.Services.Gameplay;
+﻿using System;
+using TicTacToe.Codebase.Services.Gameplay;
 using TicTacToe.Codebase.Services.UI;
 using TMPro;
 using UnityEngine;
 
 namespace TicTacToe.Codebase.UI.Elements
 {
-    public class WinScreen : BaseWindow
+    public class GameResultScreen : BaseWindow
     {
         [SerializeField]
         private TextMeshProUGUI _header;
         
-        private WinScreenArgs _currentArgs;
+        private GameResultScreenArgs _currentArgs;
 
         public override void SetArgs(UiArgs args)
         {
-            _currentArgs = (WinScreenArgs)args;
+            _currentArgs = (GameResultScreenArgs)args;
         }
 
         public override void OpenSequence()
@@ -24,12 +25,18 @@ namespace TicTacToe.Codebase.UI.Elements
             switch (_currentArgs.WinnerSign)
             {
                 case SignType.Cross:
-                    _header.text = "Cross wins";
+                    _header.text = "Victory of the crosses";
                     break;
                 
                 case SignType.Ring:
-                    _header.text = "Ring wins";
+                    _header.text = "Victory of the rings";
                     break;
+                
+                case SignType.None:
+                    _header.text = "Draw";
+                    break;
+                
+                default: throw new Exception($"Can't handle sign type {_currentArgs.WinnerSign}");
             }
         }
 

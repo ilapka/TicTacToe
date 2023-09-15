@@ -4,7 +4,7 @@ namespace TicTacToe.Codebase.Services.UI
     {
         void RegisterUi(UiContainer container);
         void UnregisterUi(UiContainer container);
-        void OpenWindow<T>(UiArgs args) where T : BaseWindow;
+        void OpenWindow<T>(UiArgs args = null) where T : BaseWindow;
         void CloseCurrentWindow();
         void FadeIn();
         void FadeOut();

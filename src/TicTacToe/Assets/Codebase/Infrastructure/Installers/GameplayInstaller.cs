@@ -9,10 +9,11 @@ namespace TicTacToe.Codebase.Infrastructure.Installers
         {
             Container.BindInterfacesTo<GameFieldService>().AsSingle();
             Container.BindInterfacesTo<CameraFollow>().AsSingle();
-            Container.BindInterfacesTo<CellClickHandler>().AsSingle();
             Container.BindInterfacesTo<GameState>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CellClickHandler>().AsSingle();
             Container.BindInterfacesTo<CheckWinService>().AsSingle();
-            Container.BindInterfacesTo<WinService>().AsSingle();
+            Container.BindInterfacesTo<EndGameService>().AsSingle();
+            Container.BindInterfacesTo<CheckCheckDrawService>().AsSingle();
         }
     }
 }

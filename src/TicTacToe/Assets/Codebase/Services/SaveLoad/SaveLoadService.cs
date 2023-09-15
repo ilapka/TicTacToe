@@ -1,35 +1,65 @@
+using System;
+using System.Collections.Generic;
 using TicTacToe.Codebase.Data;
+using TicTacToe.Codebase.Infrastructure;
 using TicTacToe.Codebase.Services.PersistentProgress;
 using UnityEngine;
 
 namespace TicTacToe.Codebase.Services.SaveLoad
 {
-    public class SaveLoadService : ISaveLoadService
+    public class SaveLoadService : ISaveLoadService, IDisposable
     {
-        private const string GameProgressKey = "GameProgress";
+        private const string PlayerProgressKey = "PlayerProgress";
 
         private readonly IPersistentProgressService _progressService;
-        //private readonly IGameFactory _gameFactory;
+        private readonly ApplicationQuitDetector _quitDetector;
 
-        public SaveLoadService(IPersistentProgressService progressService) //IGameFactory gameFactory)
+        private readonly HashSet<IProgressWriter> _progressWriters = new HashSet<IProgressWriter>();
+
+        public SaveLoadService(IPersistentProgressService progressService, ApplicationQuitDetector quitDetector)
         {
             _progressService = progressService;
-            //_gameFactory = gameFactory;
+            _quitDetector = quitDetector;
+
+            //_quitDetector.OnApplicationPaused += SaveProgress;
+            _quitDetector.OnApplicationQuited += SaveProgress;
         }
 
         public void SaveProgress()
         {
-            // foreach (ISavedProgress progressWriter in _gameFactory.ProgressWriters)
-            // {
-            //     progressWriter.UpdateProgress(_progressService.Progress);
-            // }
-            //
-            // PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
+            foreach (IProgressWriter progressWriter in _progressWriters)
+            {
+                progressWriter.UpdateProgress(_progressService.PlayerProgress);
+            }
+
+            PlayerPrefs.SetString(PlayerProgressKey, _progressService.PlayerProgress.ToJson());
         }
 
         public PlayerProgress LoadProgress()
         {
-            return PlayerPrefs.GetString(GameProgressKey)?.ToDeserialized<PlayerProgress>();
+            PlayerProgress progress = PlayerPrefs.GetString(PlayerProgressKey)?.ToDeserialized<PlayerProgress>();
+            return progress;
+        }
+
+        public void ResetProgress()
+        {
+            PlayerPrefs.SetString(PlayerProgressKey, string.Empty);
+        }
+
+        public void RegisterWriter(IProgressWriter progressWriter)
+        {
+            _progressWriters.Add(progressWriter);
+        }
+
+        public void UnregisterWriter(IProgressWriter progressWriter)
+        {
+            _progressWriters.Remove(progressWriter);
+        }
+
+        public void Dispose()
+        {
+            //_quitDetector.OnApplicationPaused -= SaveProgress;
+            _quitDetector.OnApplicationQuited -= SaveProgress;
         }
     }
 }

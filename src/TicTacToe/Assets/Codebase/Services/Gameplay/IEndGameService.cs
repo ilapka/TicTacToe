@@ -1,6 +1,6 @@
 ﻿namespace TicTacToe.Codebase.Services.Gameplay
 {
-    public interface IWinService
+    public interface IEndGameService
     {
         
     }

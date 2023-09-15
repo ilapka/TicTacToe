@@ -5,12 +5,16 @@ using TicTacToe.Codebase.Services.PersistentProgress;
 using TicTacToe.Codebase.Services.ResourceService;
 using TicTacToe.Codebase.Services.SaveLoad;
 using TicTacToe.Codebase.Services.UI;
+using UnityEngine;
 using Zenject;
 
 namespace TicTacToe.Codebase.Infrastructure.Installers
 {
     public class ApplicationInstaller : MonoInstaller, ICoroutineRunner
     {
+        [SerializeField]
+        private ApplicationQuitDetector _quitDetector;
+        
         public override void InstallBindings()
         {
             BindInfrastructure();
@@ -24,12 +28,14 @@ namespace TicTacToe.Codebase.Infrastructure.Installers
             Container.Bind<SceneLoader>().AsSingle();
             Container.BindInterfacesTo<ApplicationBootstrapper>().AsSingle();
             Container.Bind<IApplicationStateMachine>().To<ApplicationStateMachine>().AsSingle();
+            Container.Bind<IRestartLevelService>().To<RestartLevelService>().AsSingle();
+            Container.BindInstance(_quitDetector).AsSingle();
         }
 
         private void BindServices()
         {
             Container.Bind<IPersistentProgressService>().To<PersistentProgressService>().AsSingle();
-            Container.Bind<ISaveLoadService>().To<SaveLoadService>().AsSingle();
+            Container.BindInterfacesTo<SaveLoadService>().AsSingle();
             Container.Bind<IUiService>().To<UiService>().AsSingle();
             Container.Bind<IResources>().To<ResourceService>().AsSingle();
             Container.Bind<IGameFabric>().To<GameFabric>().AsSingle();
