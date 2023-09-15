@@ -33,7 +33,14 @@ namespace TicTacToe.Codebase.Infrastructure.StateMachine
 
         private void LoadProgressOrInitNew()
         {
-            _progressService.PlayerProgress = _saveLoadService.LoadProgress() ?? NewProgress();
+            PlayerProgress progress = _saveLoadService.LoadProgress();
+
+            if (progress == null || progress.FieldStatus.IsGameComplete)
+            {
+                progress = NewProgress();
+            }
+
+            _progressService.PlayerProgress = progress;
         }
 
         private PlayerProgress NewProgress()
@@ -41,7 +48,11 @@ namespace TicTacToe.Codebase.Infrastructure.StateMachine
             return new PlayerProgress()
             {
                 FieldSettings = _gameSettings.DefaultFieldSettigns,
-                FieldStatus = new FieldStatus(){ CurrentSign = SignType.Cross }
+                FieldStatus = new FieldStatus()
+                {
+                    CurrentSign = SignType.Cross,
+                    IsGameComplete = false 
+                }
             };
         }
     }

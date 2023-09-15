@@ -6,7 +6,6 @@ namespace TicTacToe.Codebase.Services.SaveLoad
     {
         void SaveProgress();
         PlayerProgress LoadProgress();
-        void ResetProgress();
         void RegisterWriter(IProgressWriter progressWriter);
         void UnregisterWriter(IProgressWriter progressWriter);
     }

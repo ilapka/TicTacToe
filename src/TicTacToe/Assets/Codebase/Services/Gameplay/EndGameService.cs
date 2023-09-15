@@ -1,4 +1,5 @@
 ﻿using System;
+using TicTacToe.Codebase.Data;
 using TicTacToe.Codebase.Infrastructure;
 using TicTacToe.Codebase.Services.SaveLoad;
 using TicTacToe.Codebase.Services.UI;
@@ -6,7 +7,7 @@ using TicTacToe.Codebase.UI.Elements;
 
 namespace TicTacToe.Codebase.Services.Gameplay
 {
-    public class EndGameService : IEndGameService, IDisposable
+    public class EndGameService : IEndGameService, IDisposable, IProgressWriter
     {
         private readonly ICheckWinService _checkWinService;
         private readonly ICheckDrawService _checkDrawService;
@@ -27,6 +28,7 @@ namespace TicTacToe.Codebase.Services.Gameplay
 
             _checkWinService.OnWin += OnWinHandler;
             _checkDrawService.OnDraw += OnDrawHandler;
+            _saveLoadService.RegisterWriter(this);
         }
 
         private void OnWinHandler(SignType signType)
@@ -34,7 +36,6 @@ namespace TicTacToe.Codebase.Services.Gameplay
             if(_isEndGame) return;
             _isEndGame = true;
             
-            _saveLoadService.ResetProgress();
             ShowResultWindow(signType);
         }
         
@@ -43,7 +44,6 @@ namespace TicTacToe.Codebase.Services.Gameplay
             if(_isEndGame) return;
             _isEndGame = true;
 
-            _saveLoadService.ResetProgress();
             ShowResultWindow(SignType.None);
         }
 
@@ -58,10 +58,16 @@ namespace TicTacToe.Codebase.Services.Gameplay
             _restartService.Restart();
         }
 
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            progress.FieldStatus.IsGameComplete = _isEndGame;
+        }
+
         public void Dispose()
         {
             _checkWinService.OnWin -= OnWinHandler;
             _checkDrawService.OnDraw -= OnDrawHandler;
+            _saveLoadService.UnregisterWriter(this);
         }
     }
 }

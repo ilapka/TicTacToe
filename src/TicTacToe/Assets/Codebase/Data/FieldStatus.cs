@@ -8,5 +8,6 @@ namespace TicTacToe.Codebase.Data
     {
         public SignType CurrentSign;
         public Cell[] Cells;
+        public bool IsGameComplete;
     }
 }

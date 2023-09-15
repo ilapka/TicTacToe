@@ -41,11 +41,6 @@ namespace TicTacToe.Codebase.Services.SaveLoad
             return progress;
         }
 
-        public void ResetProgress()
-        {
-            PlayerPrefs.SetString(PlayerProgressKey, string.Empty);
-        }
-
         public void RegisterWriter(IProgressWriter progressWriter)
         {
             _progressWriters.Add(progressWriter);
