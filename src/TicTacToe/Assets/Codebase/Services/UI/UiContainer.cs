@@ -4,8 +4,7 @@ using UnityEngine;
 using Zenject;
 
 namespace TicTacToe.Codebase.Services.UI
-{
-    [RequireComponent(typeof(ZenAutoInjecter))]
+{ 
     public class UiContainer : MonoBehaviour
     {
         [SerializeField]

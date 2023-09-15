@@ -1,5 +1,7 @@
 using TicTacToe.Codebase.Infrastructure.StateMachine;
+using TicTacToe.Codebase.Services.GameFabric;
 using TicTacToe.Codebase.Services.PersistentProgress;
+using TicTacToe.Codebase.Services.ResourceService;
 using TicTacToe.Codebase.Services.SaveLoad;
 using TicTacToe.Codebase.Services.UI;
 using Zenject;
@@ -28,6 +30,8 @@ namespace TicTacToe.Codebase.Infrastructure.Installers
             Container.Bind<IPersistentProgressService>().To<PersistentProgressService>().AsSingle();
             Container.Bind<ISaveLoadService>().To<SaveLoadService>().AsSingle();
             Container.Bind<IUiService>().To<UiService>().AsSingle();
+            Container.Bind<IResources>().To<ResourceService>().AsSingle();
+            Container.Bind<IGameFabric>().To<GameFabric>().AsSingle();
         }
     }
 }

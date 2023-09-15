@@ -11,7 +11,14 @@ namespace TicTacToe.Codebase.Infrastructure.StateMachine
 
         public override void Enter(IStateArgs args = null)
         {
-            _sceneLoader.Load(Scenes.Initial, onLoaded: EnterLoadProgress);
+            if (_sceneLoader.CurrentScene != Scenes.Initial)
+            {
+                _sceneLoader.Load(Scenes.Initial, onLoaded: EnterLoadProgress);
+            }
+            else
+            {
+                EnterLoadProgress();
+            }
         }
 
         private void EnterLoadProgress()

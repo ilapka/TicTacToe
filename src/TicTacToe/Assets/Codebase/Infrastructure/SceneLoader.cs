@@ -12,6 +12,8 @@ namespace TicTacToe.Codebase.Infrastructure
         private Coroutine _loadSceneRoutine;
         private AsyncOperation _loadingOperation;
 
+        public event Action<string> OnLoaded;
+        
         public SceneLoader(ICoroutineRunner coroutineRunner)
         {
             _coroutineRunner = coroutineRunner;
@@ -40,6 +42,7 @@ namespace TicTacToe.Codebase.Infrastructure
 
             _loadingOperation = null;
             onLoaded?.Invoke();
+            OnLoaded?.Invoke(CurrentScene);
         }
         
         private IEnumerator TryCancelLoadingOperation()
@@ -51,5 +54,7 @@ namespace TicTacToe.Codebase.Infrastructure
                 _loadingOperation = null;
             }
         }
+
+        public string CurrentScene => SceneManager.GetActiveScene().name;
     }
 }

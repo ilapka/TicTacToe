@@ -35,11 +35,7 @@ namespace TicTacToe.Codebase.Infrastructure.StateMachine
 
         private GameProgress NewProgress()
         {
-            GameProgress progress = new GameProgress();
-        
-            //fill default
-            
-            return progress;
+            return GameProgress.DefaultPreset;
         }
     }
 }
