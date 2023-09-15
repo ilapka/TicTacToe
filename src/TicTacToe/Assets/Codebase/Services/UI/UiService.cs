@@ -19,10 +19,12 @@ namespace TicTacToe.Codebase.Services.UI
         public void RegisterUi(UiContainer container) => AddContent(container);
         public void UnregisterUi(UiContainer container) => RemoveContent(container);
 
-        public void OpenWindow<T>(UiArgs args) where T : BaseWindow
+        public void OpenWindow<T>(UiArgs args = null) where T : BaseWindow
         {
             CloseCurrentWindow();
             _currentWindow = _windows[typeof(T)];
+            _currentWindow.SetArgs(args);
+            _currentWindow.OpenSequence();
         }
         
         public void CloseCurrentWindow()

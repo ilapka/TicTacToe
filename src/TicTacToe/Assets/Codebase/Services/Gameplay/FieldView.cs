@@ -1,4 +1,5 @@
-﻿using TicTacToe.Codebase.Services.GameFabric;
+﻿using TicTacToe.Codebase.Data;
+using TicTacToe.Codebase.Services.GameFabric;
 using UnityEngine;
 using Zenject;
 
@@ -6,30 +7,31 @@ namespace TicTacToe.Codebase.Services.Gameplay
 {
     public class FieldView : MonoBehaviour
     {
-        [SerializeField]
-        private float _cellOffset;
-        
-        private IFieldService _fieldService;
+        private IGameFieldService _gameFieldService;
         private IGameFabric _gameFabric;
+        private GameSettings _gameSettings;
 
         [Inject]
-        public void Construct(IFieldService fieldService, IGameFabric gameFabric)
+        public void Construct(IGameFieldService gameFieldService, IGameFabric gameFabric, GameSettings gameSettings)
         {
-            _fieldService = fieldService;
+            _gameFieldService = gameFieldService;
             _gameFabric = gameFabric;
+            _gameSettings = gameSettings;
             
-            _fieldService.OnFieldUpdate += UpdateView;
+            _gameFieldService.OnFieldUpdate += UpdateView;
         }
 
         private void UpdateView()
         {
-            foreach (Cell[] column in _fieldService.Field)
+            foreach (Cell[] column in _gameFieldService.Field)
             {
+                float cellOffset = _gameSettings.CellOffset; 
+                
                 foreach (Cell cell in column)
                 {
                     Vector2 position = new Vector2(
-                        cell.Position.x + _cellOffset * cell.Position.x,
-                        cell.Position.y + _cellOffset * cell.Position.y);
+                        cell.Position.x + cellOffset * cell.Position.x,
+                        cell.Position.y + cellOffset * cell.Position.y);
                     
                     CellView cellView = _gameFabric.CreateCell(transform, position);
                     cellView.Setup(cell);
@@ -39,7 +41,7 @@ namespace TicTacToe.Codebase.Services.Gameplay
 
         private void OnDestroy()
         {
-            _fieldService.OnFieldUpdate -= UpdateView;
+            _gameFieldService.OnFieldUpdate -= UpdateView;
         }
     }
 }

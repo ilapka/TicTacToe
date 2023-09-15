@@ -27,9 +27,9 @@ namespace TicTacToe.Codebase.Services.SaveLoad
             // PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
         }
 
-        public GameProgress LoadProgress()
+        public PlayerProgress LoadProgress()
         {
-            return PlayerPrefs.GetString(GameProgressKey)?.ToDeserialized<GameProgress>();
+            return PlayerPrefs.GetString(GameProgressKey)?.ToDeserialized<PlayerProgress>();
         }
     }
 }

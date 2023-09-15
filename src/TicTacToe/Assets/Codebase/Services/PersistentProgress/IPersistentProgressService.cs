@@ -4,6 +4,6 @@ namespace TicTacToe.Codebase.Services.PersistentProgress
 {
     public interface IPersistentProgressService
     {
-        GameProgress GameProgress { get; set; }
+        PlayerProgress PlayerProgress { get; set; }
     }
 }

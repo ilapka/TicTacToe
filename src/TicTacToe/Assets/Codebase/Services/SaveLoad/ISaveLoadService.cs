@@ -5,6 +5,6 @@ namespace TicTacToe.Codebase.Services.SaveLoad
     public interface ISaveLoadService
     {
         void SaveProgress();
-        GameProgress LoadProgress();
+        PlayerProgress LoadProgress();
     }
 }

@@ -7,7 +7,12 @@ namespace TicTacToe.Codebase.Infrastructure.Installers
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<FieldService>().AsSingle();
+            Container.BindInterfacesTo<GameFieldService>().AsSingle();
+            Container.BindInterfacesTo<CameraFollow>().AsSingle();
+            Container.BindInterfacesTo<CellClickHandler>().AsSingle();
+            Container.BindInterfacesTo<GameState>().AsSingle();
+            Container.BindInterfacesTo<CheckWinService>().AsSingle();
+            Container.BindInterfacesTo<WinService>().AsSingle();
         }
     }
 }

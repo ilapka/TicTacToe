@@ -7,6 +7,7 @@ namespace TicTacToe.Codebase.Services.Gameplay
     public class Cell
     {
         public Vector2Int Position;
+        public SignType Sign;
 
         public Cell(Vector2Int position)
         {

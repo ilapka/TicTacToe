@@ -3,7 +3,7 @@
 namespace TicTacToe.Codebase.Data
 {
     [Serializable]
-    public class GameConfiguration
+    public class FieldSettings
     {
         public int FieldWidth = 3;
         public int FieldHeight = 3;

@@ -6,14 +6,14 @@ using Zenject;
 
 namespace TicTacToe.Codebase.Services.Gameplay
 {
-    public class FieldService : IFieldService, IInitializable
+    public class GameFieldService : IGameFieldService, IInitializable
     {
         private readonly IPersistentProgressService _gameProgressService;
         public Cell[][] Field { get; private set; }
         
         public event Action OnFieldUpdate;
 
-        public FieldService(IPersistentProgressService progressService)
+        public GameFieldService(IPersistentProgressService progressService)
         {
             _gameProgressService = progressService;
         }
@@ -25,15 +25,15 @@ namespace TicTacToe.Codebase.Services.Gameplay
 
         private void CreateField()
         {
-            GameConfiguration configuration = _gameProgressService.GameProgress.Configuration;
+            FieldSettings settings = _gameProgressService.PlayerProgress.Settings;
 
-            Cell[][] field = new Cell[configuration.FieldWidth][];
+            Cell[][] field = new Cell[settings.FieldWidth][];
 
-            for (int x = 0; x < configuration.FieldWidth; x++)
+            for (int x = 0; x < settings.FieldWidth; x++)
             {
-                field[x] = new Cell[configuration.FieldHeight];
+                field[x] = new Cell[settings.FieldHeight];
                 
-                for (int y = 0; y < configuration.FieldHeight; y++)
+                for (int y = 0; y < settings.FieldHeight; y++)
                 {
                     Cell cell = new Cell(new Vector2Int(x, y));
                     field[x][y] = cell;

@@ -8,11 +8,13 @@ namespace TicTacToe.Codebase.Infrastructure.StateMachine
     { 
         private readonly IPersistentProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
+        private readonly GameSettings _gameSettings;
 
-        public LoadProgressState(IPersistentProgressService progressService, ISaveLoadService saveLoadService)
+        public LoadProgressState(IPersistentProgressService progressService, ISaveLoadService saveLoadService, GameSettings gameSettings)
         {
             _progressService = progressService;
             _saveLoadService = saveLoadService;
+            _gameSettings = gameSettings;
         }
 
         public override void Enter(IStateArgs args = null)
@@ -30,12 +32,15 @@ namespace TicTacToe.Codebase.Infrastructure.StateMachine
 
         private void LoadProgressOrInitNew()
         {
-            _progressService.GameProgress = _saveLoadService.LoadProgress() ?? NewProgress();
+            _progressService.PlayerProgress = _saveLoadService.LoadProgress() ?? NewProgress();
         }
 
-        private GameProgress NewProgress()
+        private PlayerProgress NewProgress()
         {
-            return GameProgress.DefaultPreset;
+            return new PlayerProgress()
+            {
+                Settings = _gameSettings.DefaultFieldSettigns,
+            };
         }
     }
 }
