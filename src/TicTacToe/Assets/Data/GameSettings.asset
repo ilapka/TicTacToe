@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 642853681eef48d1b3414693f85645fa, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  CellOffset: 0
-  DefaultFieldSettigns:
-    FieldWidth: 5
-    FieldHeight: 5
-    ChainLenght: 5
+  _cellOffset: 0.01
+  _defaultFieldSettigns:
+    _fieldWidth: 3
+    _fieldHeight: 3
+    _chainLenght: 3

@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using TicTacToe.Codebase.Services.Gameplay;
+using UnityEngine;
 
-namespace TicTacToe.Codebase.Services.Gameplay
+namespace TicTacToe.Codebase.UI.Gameplay
 {
     public class CellView : MonoBehaviour
     {

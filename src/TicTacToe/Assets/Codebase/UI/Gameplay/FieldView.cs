@@ -1,21 +1,22 @@
 ﻿using TicTacToe.Codebase.Data;
-using TicTacToe.Codebase.Services.GameFabric;
+using TicTacToe.Codebase.Services.GameFactory;
+using TicTacToe.Codebase.Services.Gameplay;
 using UnityEngine;
 using Zenject;
 
-namespace TicTacToe.Codebase.Services.Gameplay
+namespace TicTacToe.Codebase.UI.Gameplay
 {
     public class FieldView : MonoBehaviour
     {
         private IGameFieldService _gameFieldService;
-        private IGameFabric _gameFabric;
+        private IGameFactory _gameFactory;
         private GameSettings _gameSettings;
 
         [Inject]
-        public void Construct(IGameFieldService gameFieldService, IGameFabric gameFabric, GameSettings gameSettings)
+        public void Construct(IGameFieldService gameFieldService, IGameFactory gameFactory, GameSettings gameSettings)
         {
             _gameFieldService = gameFieldService;
-            _gameFabric = gameFabric;
+            _gameFactory = gameFactory;
             _gameSettings = gameSettings;
             
             _gameFieldService.OnFieldUpdate += UpdateView;
@@ -33,7 +34,7 @@ namespace TicTacToe.Codebase.Services.Gameplay
                         cell.Position.x + cellOffset * cell.Position.x,
                         cell.Position.y + cellOffset * cell.Position.y);
                     
-                    CellView cellView = _gameFabric.CreateCell(transform, position);
+                    CellView cellView = _gameFactory.CreateCell(transform, position);
                     cellView.Setup(cell);
                 }
             }

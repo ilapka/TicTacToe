@@ -1,5 +1,5 @@
 using TicTacToe.Codebase.Infrastructure.StateMachine;
-using TicTacToe.Codebase.Services.GameFabric;
+using TicTacToe.Codebase.Services.GameFactory;
 using TicTacToe.Codebase.Services.InputService;
 using TicTacToe.Codebase.Services.PersistentProgress;
 using TicTacToe.Codebase.Services.ResourceService;
@@ -38,7 +38,7 @@ namespace TicTacToe.Codebase.Infrastructure.Installers
             Container.BindInterfacesTo<SaveLoadService>().AsSingle();
             Container.Bind<IUiService>().To<UiService>().AsSingle();
             Container.Bind<IResources>().To<ResourceService>().AsSingle();
-            Container.Bind<IGameFabric>().To<GameFabric>().AsSingle();
+            Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
             Container.Bind<ICameraProvider>().To<CameraProvider>().AsSingle();
             Container.BindInterfacesTo<InputService>().AsSingle();
         }

@@ -1,12 +1,20 @@
 ﻿using System;
+using UnityEngine;
 
 namespace TicTacToe.Codebase.Data
 {
     [Serializable]
     public class FieldSettings
     {
-        public int FieldWidth = 3;
-        public int FieldHeight = 3;
-        public int ChainLenght = 3;
+        [SerializeField]
+        private int _fieldWidth = 3;
+        [SerializeField]
+        public int _fieldHeight = 3;
+        [SerializeField]
+        public int _chainLenght = 3;
+        
+        public int FieldWidth => _fieldWidth;
+        public int FieldHeight => _fieldHeight;
+        public int ChainLenght => _chainLenght;
     }
 }

@@ -25,7 +25,7 @@ namespace TicTacToe.Codebase.Services.Gameplay
         {
             var chainLength = GetLongestChain(_gameFieldService.Field, clickedCell);
             
-            if (chainLength >= _progressService.PlayerProgress.FieldSettings.ChainLenght)
+            if (chainLength >= _progressService.PlayerProgress.FieldSettings._chainLenght)
             {
                 DeclareWin(clickedCell.Sign);
             }

@@ -3,7 +3,7 @@ using TicTacToe.Codebase.Infrastructure;
 
 namespace TicTacToe.Codebase.Services.Gameplay
 {
-    public class CheckCheckDrawService : ICheckDrawService, IDisposable
+    public class CheckDrawService : ICheckDrawService, IDisposable
     {
         private readonly CellClickHandler _clickHandler;
         private readonly IGameFieldService _gameFieldService;
@@ -14,7 +14,7 @@ namespace TicTacToe.Codebase.Services.Gameplay
 
         public event Action OnDraw;
 
-        public CheckCheckDrawService(CellClickHandler clickHandler, IGameFieldService gameFieldService)
+        public CheckDrawService(CellClickHandler clickHandler, IGameFieldService gameFieldService)
         {
             _clickHandler = clickHandler;
             _gameFieldService = gameFieldService;

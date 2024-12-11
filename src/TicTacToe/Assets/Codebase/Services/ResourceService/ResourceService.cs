@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TicTacToe.Codebase.Services.Gameplay;
+using TicTacToe.Codebase.UI.Gameplay;
 using UnityEngine;
 
 namespace TicTacToe.Codebase.Services.ResourceService

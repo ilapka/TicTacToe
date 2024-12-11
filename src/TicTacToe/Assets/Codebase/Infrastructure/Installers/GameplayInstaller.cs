@@ -13,7 +13,7 @@ namespace TicTacToe.Codebase.Infrastructure.Installers
             Container.BindInterfacesAndSelfTo<CellClickHandler>().AsSingle();
             Container.BindInterfacesTo<CheckWinService>().AsSingle();
             Container.BindInterfacesTo<EndGameService>().AsSingle();
-            Container.BindInterfacesTo<CheckCheckDrawService>().AsSingle();
+            Container.BindInterfacesTo<CheckDrawService>().AsSingle();
         }
     }
 }

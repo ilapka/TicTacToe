@@ -41,9 +41,9 @@ namespace TicTacToe.Codebase.Services.Gameplay
 
             for (int x = 0; x < settings.FieldWidth; x++)
             {
-                field[x] = new Cell[settings.FieldHeight];
+                field[x] = new Cell[settings._fieldHeight];
                 
-                for (int y = 0; y < settings.FieldHeight; y++)
+                for (int y = 0; y < settings._fieldHeight; y++)
                 {
                     Cell cell = isSaved
                         ? fieldStatus.Cells[settings.FieldWidth * y + x]
